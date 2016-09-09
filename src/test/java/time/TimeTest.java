@@ -52,15 +52,30 @@ public class TimeTest extends Assert {
         Main m = new Main();
         assertEquals(Main.NIGHT_MESSAGE, m.chooseGreetingMessage(23));
         assertTrue(Main.NIGHT_MESSAGE.equals(m.chooseGreetingMessage(5)));
-        assertFalse("6 a.m isn't included to night time",Main.NIGHT_MESSAGE.equals(m.chooseGreetingMessage(6)));
+        assertFalse("6 a.m isn't included to night time", Main.NIGHT_MESSAGE.equals(m.chooseGreetingMessage(6)));
     }
 
     @Test
-    public void getMessageByTimeTest(){
-        Main m=new Main();
-        LocalDateTime time=LocalDateTime.now();
-        time= time.withHour(10);   //Set time in range [9,19)
+    public void getMessageByTimeTest() {
+        Main m = new Main();
+        LocalDateTime time = LocalDateTime.now();
+        time = time.withHour(9);   //Set time in range [9,19)
         assertEquals(Main.DAY_MESSAGE, m.getMessageByTime(time));
+
+        time = time.withHour(7);  //Set time in range [6,9)
+        assertEquals(Main.MORNING_MESSAGE, m.getMessageByTime(time));
+
+        time = time.withHour(9);  //Set time in range [6,9)
+        assertFalse(Main.MORNING_MESSAGE.equals(m.getMessageByTime(time)));
+
+        time = time.withHour(19);//Set time in range [19,23)
+        assertEquals(Main.EVENING_MESSAGE, m.getMessageByTime(time));
+
+        time = time.withHour(5);//Set time in range [23,6)
+        assertEquals(Main.NIGHT_MESSAGE, m.getMessageByTime(time));
+
+        time = time.withHour(23);//Set time in range [23,6)
+        assertEquals(Main.NIGHT_MESSAGE, m.getMessageByTime(time));
     }
 
 }
