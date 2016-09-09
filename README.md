@@ -1,4 +1,5 @@
-# test-task
-task1
+Project GreetingMessage.
 
-https://travis-ci.org/refatova/test-task.svg?branch=master
+
+!https://travis-ci.org/refatova/test-task.svg?branch=travis-setup!:https://travis-ci.org/refatova/test-task
+
